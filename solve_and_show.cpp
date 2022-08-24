@@ -5,8 +5,15 @@
 
 #include "get_coefficients.h"
 
-static const int INFINITE_ROOTS = -1;
-static const int ERROR_SOLVER=-2;
+#define ERROR_SOLVER -2
+
+enum ROOTSNUMBER
+    {
+    NO_ROOTS= 0,
+    ONE_ROOT =  1,
+    TWO_ROOTS = 2,
+    INFINITE_ROOTS = -1
+    };
 
 int solve_linear(double b, double c, double *x1);
 int solve_square(double a, double b, double c, double *x1, double *x2);
@@ -52,14 +59,14 @@ int solve_linear(double b, double c, double *x1)
      // no roots
      if( b == 0 && c != 0){
         *x1 = NAN;
-        return 0;
+        return NO_ROOTS;
     }
 
     //1 root
     if (b != 0 && c != 0 )
         {
         *x1 = -c/b;
-        return 1;
+        return ONE_ROOT;
         }
 
     // ifinity roots
@@ -78,21 +85,21 @@ int solve_square(double a, double b, double c, double *x1, double *x2)
         {
         *x1 = NAN;
         *x2 = NAN;
-        return 0;
+        return NO_ROOTS;
         }
 
     if( dis == 0)
         {
         *x1 = - b / (2*a);
         *x2 = NAN;
-        return 1;
+        return ONE_ROOT;
         }
 
     if (dis > 0)
         {
         *x1 = (-b + sqrt(dis)) / (2*a);
         *x2 = (-b - sqrt(dis)) / (2*a);
-        return 2;
+        return TWO_ROOTS;
         }
 
     return ERROR_SOLVER;
@@ -103,11 +110,13 @@ void show_result(int number_of_roots, double *x1, double *x2)
     {
      switch(number_of_roots)
             {
-            case 0: printf("Equation has no roots\n");
+            case NO_ROOTS: printf("Equation has no roots\n");
                     break;
-            case 1: printf("Equation has 1 root: %lg\n",*x1);
+
+            case ONE_ROOT: printf("Equation has 1 root: %lg\n",*x1);
                     break;
-            case 2: printf("Equation has 2 root: %lg and %lg\n",*x1, *x2);
+
+            case TWO_ROOTS: printf("Equation has 2 root: %lg and %lg\n",*x1, *x2);
                     break;
 
             case INFINITE_ROOTS:

@@ -6,6 +6,7 @@
 #include <stdlib.h>
 
 #include "solve_and_show.h"
+#include "Unit_test.h"
 
 // old version
 //#include "solve_square_equation.cpp"
@@ -14,6 +15,8 @@
 
 int main()
     {
+    Unit_test();
+
     char repeat = 0;
     do{
         double a = NAN, b = NAN, c = NAN;
