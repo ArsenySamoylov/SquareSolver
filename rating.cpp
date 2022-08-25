@@ -12,14 +12,14 @@ void rate()
     int r;
     scanf("%d", &r);
     printf("\nOur  rating: %d *****", r);
-    printf("MEOWOOOOWWOWOOWOWOOWOWOWOWOWO");
+    printf("MEOWOOOOO");
     if( r == 5)
        print_reward();
     }
 
 
 
-    // в разработке
+    // developing
 void print_reward()
     {
     printf("\n");

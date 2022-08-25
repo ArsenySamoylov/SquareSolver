@@ -1,4 +1,3 @@
-// #include <TXLib.h>
 #include <math.h>
 #include <stdio.h>
 #include <assert.h>
@@ -8,9 +7,6 @@
 #include "solve_and_show.h"
 #include "Unit_test.h"
 
-// old version
-//#include "solve_square_equation.cpp"
-//#include "get_coefficients.h"
  #include "rating.h"
 
 int main()

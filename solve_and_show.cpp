@@ -4,6 +4,7 @@
 #include <assert.h>
 
 #include "get_coefficients.h"
+#include "compare_double.h"
 
 #define ERROR_SOLVER -2
 
@@ -15,15 +16,15 @@ enum ROOTSNUMBER
     INFINITE_ROOTS = -1
     };
 
-int solve_linear(double b, double c, double *x1);
-int solve_square(double a, double b, double c, double *x1, double *x2);
-void show_result(int number_of_roots, double *x1, double *x2);
+int solve_linear( const double b, const double c, double *x1);
+int solve_square( const double a, const double b, const double c, double *x1, double *x2);
+void show_result( const int number_of_roots, const double *x1, const double *x2);
 
 
 
 //*************************************main function
 
-int solve (double a, double b, double c, double *x1, double *x2)
+int solve (const double a, const double b, const double c, double *x1, double *x2)
     {
 
     assert(x1 != x2);
@@ -32,14 +33,14 @@ int solve (double a, double b, double c, double *x1, double *x2)
     int number_of_roots = 0;
 
     //if linear equaition (a==0)
-    if ( a == 0 )
+    if ( compare_double(a,0) == SAME )
         {
          number_of_roots = solve_linear(b, c, x1);
         *x2 = NAN;
         }
 
     //if square equation
-    if ( a != 0 )
+    if ( !(compare_double(a,0) == SAME) )
         {
         number_of_roots = solve_square(a, b, c, x1, x2);
         }
@@ -53,52 +54,59 @@ int solve (double a, double b, double c, double *x1, double *x2)
 
 
 /////********************solve linear
-int solve_linear(double b, double c, double *x1)
+int solve_linear( const double b, const double c, double *x1)
     {
 
-     // no roots
-     if( b == 0 && c != 0){
+     // no roots or infinite roots
+     if( compare_double(b,0) == SAME )
+        {
         *x1 = NAN;
+
+        if ( compare_double(c,0) == SAME )
+            return INFINITE_ROOTS;
+
         return NO_ROOTS;
-    }
+        }
 
     //1 root
-    if (b != 0 && c != 0 )
-        {
-        *x1 = -c/b;
-        return ONE_ROOT;
-        }
+    *x1 = -c/b;
+    return ONE_ROOT;
 
-    // ifinity roots
-    if(b == 0 && c == 0)
-        {
-        *x1 = NAN;
-        return INFINITE_ROOTS;
-        }
-    return ERROR_SOLVER;
     }
 //////******************** solve square
-int solve_square(double a, double b, double c, double *x1, double *x2)
+int solve_square( const double a, const double b, const double c, double *x1, double *x2)
     {
     int dis = (b*b - 4*a*c);
-    if ( dis < 0 )
+    if ( compare_double(dis, 0) == FIRST_LOWER )
         {
         *x1 = NAN;
         *x2 = NAN;
         return NO_ROOTS;
         }
 
-    if( dis == 0)
+    if( compare_double(dis,0) == SAME )
         {
         *x1 = - b / (2*a);
         *x2 = NAN;
+
         return ONE_ROOT;
         }
 
-    if (dis > 0)
+    if ( compare_double(dis,0) == FIRST_BIGGER )
         {
-        *x1 = (-b + sqrt(dis)) / (2*a);
-        *x2 = (-b - sqrt(dis)) / (2*a);
+        double sqrt_dis = sqrt(dis);
+        double root1 = (-b + sqrt_dis) / (2*a),
+               root2 = (-b - sqrt_dis) / (2*a);
+        if ( compare_double(root1,root2) == FIRST_LOWER )
+            {
+            *x1 = root1;
+            *x2 = root2;
+            }
+        else
+            {
+            *x1 = root2;
+            *x2 = root1;
+            }
         return TWO_ROOTS;
         }
 
@@ -106,7 +114,7 @@ int solve_square(double a, double b, double c, double *x1, double *x2)
     }
 
 /////******************** show result
-void show_result(int number_of_roots, double *x1, double *x2)
+void show_result( const int number_of_roots, const double *x1,  const double *x2)
     {
      switch(number_of_roots)
             {
