@@ -1,22 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <TXLib.h>
 
-#include "compare_double.h"
-#include "solve_and_show.h"
+#include "../headers/solve_and_show.h"
+#include "../headers/usefull_functions.h"
+#include "../headers/Unit_test.h"
 
-int get_test(FILE *F_UNIT_TEST, double *a, double *b, double *c, double *root1, double *root2 );
-void show_error( const double a,     const double b,     const double c,
-                 const double root1, const double root2, const int number_of_roots,
-                 const double x1,    const double x2,    const int num_of_rts);
-int check( FILE *F_UNIT_TEST);
 
-const int USELLES = 100;
-
-////////////////////////////////////main function
 void Unit_test()
     {
-     FILE *F_UNIT_TESTS = fopen( "UNIT_TESTS.txt", "r" );
+     FILE *F_UNIT_TESTS = fopen( "../UNIT_TESTS.txt", "r" );
      // if file with tests doesn't exist
      if( F_UNIT_TESTS == NULL )
         {
@@ -25,33 +19,46 @@ void Unit_test()
         }
 
      //get first uselles line
+
+     /* 1-st solution fgets();
+     const int USELLES = 100;
      char uselles[USELLES];
      fgets( uselles, USELLES, F_UNIT_TESTS );
+     */
+
+     // 2-nd solution fscanf()
+     fscanf( F_UNIT_TESTS, "%*[^\n]");
 
      int Error_cnt = 0;
+     int Number_of_tests = 0;
 
      while( !feof(F_UNIT_TESTS) )
         {
          int result = check(F_UNIT_TESTS);
+         Number_of_tests++;
          if (result == 0)
             Error_cnt++;
         }
      fclose(F_UNIT_TESTS);
 
-      if ( Error_cnt == 0 )
+     if ( Error_cnt == 0 )
+        {
+        $so
         printf("Test finished without mistakes\n");
+        }
 
-      printf("Occure %d errors in Unit Tests\n", Error_cnt);
+     printf("Occure %d errors from %d Unit Tests\n\n\n", Error_cnt, Number_of_tests);
     }
-///////////////////////////////////end
+
 
 void show_error( const double a,     const double b,     const double c,
                  const double root1, const double root2, const int number_of_roots,
                  const double x1,    const double x2,    const int num_of_rts)
      {
-
-       printf("In equasion %lgx^2 + (%lg)x + (%lg) = 0 occured error\n", a, b, c);
-
+       //txSetConsoleAttr( TX_RED );
+       $sE
+       printf("In equasion %lgx^2 + (%lg)x + (%lg) = 0 occurred error\n", a, b, c);
+       txSetConsoleAttr (TX_white );
        switch(number_of_roots)
             {
             case INFINITE_ROOTS:
@@ -112,15 +119,16 @@ int check(FILE *F_UNIT_TESTS)
      int num_of_rts = solve( a, b, c, &x1, &x2);
 
      //compare to data from test
-     int flag = (number_of_roots == num_of_rts);
-         flag *= ( (compare_double(x1, root1) == SAME) || (isfinite(x1) == 0 && isfinite(root1) == 0) );
-         flag *= ( (compare_double(x2, root2) == SAME) || (isfinite(x2) == 0 && isfinite(root2) == 0) );
-     if ( flag == 0 )
+     int error_flag = (number_of_roots == num_of_rts);
+         error_flag *= ( (compare_double(x1, root1) == SAME) || (isfinite(x1) == 0 && isfinite(root1) == 0) );
+         error_flag *= ( (compare_double(x2, root2) == SAME) || (isfinite(x2) == 0 && isfinite(root2) == 0) );
+
+     if (error_flag == 0 )
         {
         show_error(a, b, c, root1, root2, number_of_roots, x1, x2, num_of_rts);
         }
-     return flag;
 
+     return error_flag;
     }
 
 

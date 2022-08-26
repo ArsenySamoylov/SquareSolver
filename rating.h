@@ -10,6 +10,7 @@
     /**
         \brief This function asks user to rate programm
                from 1 to 5
+        \details This function doesn't check input value
 
     */
     void rate();

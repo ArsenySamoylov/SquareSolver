@@ -4,17 +4,21 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "solve_and_show.h"
-#include "Unit_test.h"
+#include "../headers/solve_and_show.h"
+#include "../headers/Unit_test.h"
+#include "../headers/usefull_functions.h"
 
- #include "rating.h"
+#include "../headers/rating.h"
+
+#ifdef UNIT_TESTING
+void Unit_test();
+#endif
 
 int main()
     {
-    Unit_test();
-
     char repeat = 0;
-    do{
+    do
+        {
         double a = NAN, b = NAN, c = NAN;
         get_coefficients(&a, &b, &c);
 
@@ -24,15 +28,15 @@ int main()
 
         show_result(number_of_roots, &x1, &x2);
 
-        getchar();
+        clear_buffer();
+
         printf("Press any key to continue or 'n' to stop ");
         repeat=getchar();
         system("cls");
 
-        }while(repeat != 'n');
+        } while(repeat != 'n');
 
    // Rating
-   // в разработке
     rate();
 
 }

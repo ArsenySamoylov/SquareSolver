@@ -1,4 +1,3 @@
-//#include <TXLib.h>
 
 #include <stdio.h>
 #include <string.h>
@@ -11,8 +10,7 @@ void rate()
     printf("Rate our programm from 1 to 5\n(if you want a secrete prise -> rate 5 ;) - ") ;
     int r;
     scanf("%d", &r);
-    printf("\nOur  rating: %d *****", r);
-    printf("MEOWOOOOO");
+    printf("\nOur  rating: %d *****\n", r);
     if( r == 5)
        print_reward();
     }
@@ -23,7 +21,7 @@ void rate()
 void print_reward()
     {
     printf("\n");
-    printf("MEOWwwwww \n\n\n");
+    printf("MEOWOOOOO MEOWwwwww \n");
     printf(" ,_     _           \n");
     printf(" |\\\\_,-~/           \n");
     printf(" / _  _ |    ,--.   \n");
