@@ -10,11 +10,14 @@
 
 void Unit_test()
     {
-     FILE *F_UNIT_TESTS = fopen( "../UNIT_TESTS.txt", "r" );
+     const char* testFile = "../UNIT_TESTS.txt";
+
+     FILE *F_UNIT_TESTS = fopen( testFile, "r" );
+
      // if file with tests doesn't exist
      if( F_UNIT_TESTS == NULL )
         {
-        printf("File \"UNIT_TESTS.txt\" with unit test not found\n");
+        printf("File \"%s\" with unit test not found. Meow.\n", testFile);
         return;
         }
 
@@ -55,10 +58,8 @@ void show_error( const double a,     const double b,     const double c,
                  const double root1, const double root2, const int number_of_roots,
                  const double x1,    const double x2,    const int num_of_rts)
      {
-       //txSetConsoleAttr( TX_RED );
        $sE
        printf("In equasion %lgx^2 + (%lg)x + (%lg) = 0 occurred error\n", a, b, c);
-       txSetConsoleAttr (TX_white );
        switch(number_of_roots)
             {
             case INFINITE_ROOTS:
