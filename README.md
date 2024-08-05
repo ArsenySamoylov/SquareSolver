@@ -25,4 +25,4 @@ Enjoy using my project!!!!!
 
 Contact me if you want to commit any ideas, features or if you found bug
 
-tm: @ivalox
+tg: [@ivalox](https://telegram.me/ivalox)
