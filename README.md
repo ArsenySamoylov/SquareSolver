@@ -1,5 +1,5 @@
 # Disclaimer
-This is me first ~~serious~~ studying project. It deliberately stays open as a remainder for me =)
+This is my first ~~serious~~ studying project. It deliberately stays open as a remainder for me =)
 
 So don't be too harsh on it =)
 
