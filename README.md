@@ -1,16 +1,22 @@
+# Disclaimer
+This is me first ~~serious~~ studying project. It deliberately stays open as a remainder for me =)
+
+So don't be too harsh on it =)
+
+
 # SquareSolver
-If you  want to solve square equation like professional, then You in the right placce
+If you want to solve square equation like professional, then You're in the right place
 
-This magic function allow you to solve ANY square or linear equation !!!
-You can even easilly solve equtions with infinite amount of roots (in that case functon assignes Not A Number to roots variavles)
+This magic function allows you to solve ANY square or linear equation !!!
+You can even easily solve equations with infinite amount of roots (in that case function assigns Not A Number to roots variables)
 
-Also this project with functionality of:
+Also, this project with functionality of:
 
-     -) runnig Unit tests from file
+     -) Running Unit tests from file
      
-     -) solving square and linear eqution with UI design 
+     -) Solving square and linear equation with UI design 
      
-     -) rating project and reward systems
+     -) Rating project and reward systems
      
      
 
